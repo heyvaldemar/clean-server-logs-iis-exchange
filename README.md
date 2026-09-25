@@ -1,6 +1,7 @@
 # Clean IIS and Exchange server logs
 
 [![Script Verification](https://github.com/heyvaldemar/clean-server-logs-iis-exchange/actions/workflows/verification.yml/badge.svg?branch=main)](https://github.com/heyvaldemar/clean-server-logs-iis-exchange/actions/workflows/verification.yml)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/14904/badge)](https://www.bestpractices.dev/projects/14904)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 IIS and Exchange write logs that nothing rotates. On a busy server they fill the system volume, and Exchange stops accepting mail long before anyone reads a disk alert. This PowerShell script deletes log files older than a given age from the IIS and Exchange logging paths.
