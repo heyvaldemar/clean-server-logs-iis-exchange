@@ -1,0 +1,7 @@
+# file	old	new	what the tests must notice
+"clean-server-logs-iis-exchange.ps1"	"$_.LastWriteTime -lt $cutoff"	"$_.LastWriteTime -gt $cutoff"	"the age comparison reversed: new logs deleted, old kept"
+"clean-server-logs-iis-exchange.ps1"	"-Include $Include -Recurse"	"-Recurse"	"every file type deleted, not only logs"
+"clean-server-logs-iis-exchange.ps1"	"if ($PSCmdlet.ShouldProcess($file.FullName"	"if ($true -or $PSCmdlet.ShouldProcess($file.FullName"	"-WhatIf ignored"
+"clean-server-logs-iis-exchange.ps1"	"[ValidateRange(1, 3650)]"	"[ValidateRange(0, 3650)]"	"-Days 0 accepted"
+"clean-server-logs-iis-exchange.ps1"	"the folder does not exist on this server.\"\n        continue"	"the folder does not exist on this server.\"\n        break"	"a missing folder stops the whole run"
+"clean-server-logs-iis-exchange.ps1"	"$deleted++"	"$deleted += 0"	"the report undercounts what it deleted"

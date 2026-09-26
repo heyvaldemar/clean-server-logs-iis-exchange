@@ -64,6 +64,17 @@ Register-ScheduledTask -TaskName 'Clean IIS and Exchange logs' -Action $action -
 
 The [Script Verification](https://github.com/heyvaldemar/clean-server-logs-iis-exchange/actions/workflows/verification.yml?query=branch%3Amain) workflow runs on every push, pull request, and weekly: it parses the script, runs PSScriptAnalyzer at Error and Warning severity, checks that the comment-based help is present, and lints the workflow itself.
 
+
+**What the script does is tested, not just parsed.** The [Pester](https://pester.dev/) suite in [`tests/`](tests/) runs the script against a real folder of files with set ages, on Linux as well as Windows: logs older than `-Days` go, in subfolders too; newer logs stay; files that are not logs stay however old; the folders stay; `-WhatIf` deletes nothing and reports nothing deleted; a missing folder is skipped without stopping the run; `-Include` is honoured; and `-Days 0` is refused. [`tests/plant-violations.py`](tests/plant-violations.py) then breaks those promises one at a time on a copy of the script, 6 ways listed in [`tests/plants.tsv`](tests/plants.tsv), and fails the run if the tests stay green through any of them. Both run in CI on every push.
+
+```powershell
+./tests/run.ps1
+```
+
+```bash
+python3 tests/plant-violations.py -- pwsh -NoProfile -NonInteractive -File tests/run.ps1
+```
+
 ---
 
 ## About the maintainer
